@@ -23,30 +23,33 @@ const MenuItem = ({ product }) => {
   };
 
   return (
-    <div className="bg-secondary rounded-3xl relative">
-      <div className="w-full  bg-[#f1f2f3] h-[210px] grid place-content-center rounded-bl-[46px] rounded-tl-2xl rounded-tr-2xl ">
+    <div className="bg-white rounded-2xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl relative overflow-hidden">
+      <div className="w-full h-[210px] flex justify-center items-center rounded-t-2xl overflow-hidden">
         <Link href={`/product/${product._id}`}>
-          <div className="relative w-36 h-36 hover:scale-110 transition-all">
+          <div className="relative w-full h-full">
             <Image
               src={product.img}
-              alt=""
+              alt={product.title}
               layout="fill"
-              className="rounded-full"
+              objectFit="cover" // Ensure the image covers the area while preserving aspect ratio
+              className="transition-transform duration-300 hover:scale-105" // Slight zoom effect on hover
             />
           </div>
         </Link>
       </div>
-      <div className="p-[25px] text-white ">
-        <h4 className="text-xl font-semibold mb-3 ">{product.title}</h4>
-        <p className="text-[15px]">{product.desc}</p>
-        <div className="flex justify-between items-center mt-4">
-          <span>${product.prices[0]}</span>
+      <div className="p-5 text-gray-800">
+        <h4 className="text-xl font-bold mb-1">{product.title}</h4> {/* Bold and larger title */}
+        <p className="text-sm text-gray-600 mb-4">{product.desc}</p> {/* Lighter description */}
+        <div className="flex justify-between items-center">
+          <span className="text-lg font-semibold text-purple-600">${product.prices[0]}</span> {/* Emphasized price */}
           <button
-            className="btn-primary !w-10 !h-10 !rounded-full !p-0 grid place-content-center absolute bottom-4 right-5"
+            className={`btn-primary w-10 h-10 rounded-full p-0 grid place-content-center transition-colors duration-200 ${
+              findCart ? 'bg-gray-400 cursor-not-allowed' : 'bg-purple-600 hover:bg-purple-500'
+            }`}
             disabled={findCart}
             onClick={addToCart}
           >
-            <RiShoppingCart2Fill />
+            <RiShoppingCart2Fill className="text-white" />
           </button>
         </div>
       </div>

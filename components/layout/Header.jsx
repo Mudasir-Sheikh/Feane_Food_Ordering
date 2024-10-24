@@ -11,90 +11,50 @@ const Header = () => {
   const [isSearchModal, setIsSearchModal] = useState(false);
   const [isMenuModal, setIsMenuModal] = useState(false);
   const cart = useSelector((state) => state.cart);
-
   const router = useRouter();
 
   return (
     <div
       className={`h-[5.5rem] z-50 relative w-full ${
         router.asPath === "/" ? "bg-transparent fixed" : "bg-secondary"
-      }`}
+      } transition duration-300`}
     >
       <div className="container mx-auto text-white flex justify-between items-center h-full">
         <Logo />
         <nav
           className={`sm:static absolute top-0 left-0 sm:w-auto sm:h-auto w-full h-screen sm:text-white text-black sm:bg-transparent bg-white sm:flex hidden z-50 ${
-            isMenuModal === true && "!grid place-content-center"
+            isMenuModal ? "!grid place-content-center" : "hidden"
           }`}
         >
-          <ul className="flex gap-x-2 sm:flex-row flex-col items-center">
-            <li
-              className={`px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer ${
-                router.asPath === "/" && "text-primary"
-              }}`}
-              onClick={() => setIsMenuModal(false)}
-            >
-              <Link href="/">Home</Link>
-            </li>
-            <li
-              className={`px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer ${
-                router.asPath === "/menu" && "text-primary"
-              }`}
-              onClick={() => setIsMenuModal(false)}
-            >
-              <Link href="/menu">Menu</Link>
-            </li>
-            <li
-              className={`px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer ${
-                router.asPath === "/about" && "text-primary"
-              }`}
-              onClick={() => setIsMenuModal(false)}
-            >
-              <Link href="/about">About</Link>
-            </li>
-            <li
-              className={`px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer ${
-                router.asPath === "/reservation" && "text-primary"
-              }`}
-              onClick={() => setIsMenuModal(false)}
-            >
-              <Link href="/reservation">Book Table</Link>
-            </li>
+          <ul className="flex gap-x-4 sm:flex-row flex-col items-center text-center">
+            {["Home", "Menu", "About", "Book Table"].map((item) => (
+              <li
+                key={item}
+                className={`px-5 py-2 uppercase hover:text-primary transition-all cursor-pointer ${
+                  router.asPath === `/${item.toLowerCase().replace(" ", "")}` && "text-primary"
+                }`}
+                onClick={() => setIsMenuModal(false)}
+              >
+                <Link href={`/${item.toLowerCase().replace(" ", "")}`}>{item}</Link>
+              </li>
+            ))}
           </ul>
-          {isMenuModal && (
-            <button
-              className="absolute  top-4 right-4 z-50"
-              onClick={() => setIsMenuModal(false)}
-            >
-              <GiCancel size={25} className=" transition-all" />
-            </button>
-          )}
+          <button
+            className="absolute top-4 right-4 z-50"
+            onClick={() => setIsMenuModal(false)}
+          >
+            <GiCancel size={25} className="transition-all hover:text-primary" />
+          </button>
         </nav>
-        <div className="flex gap-x-4 items-center">
+        <div className="flex gap-x-6 items-center">
           <Link href="/auth/login">
-            <span>
-              {router.asPath.includes("auth") ? (
-                <i
-                  className={`fa-solid fa-right-to-bracket ${
-                    router.asPath.includes("login") && "text-primary"
-                  } `}
-                ></i>
-              ) : (
-                <FaUserAlt
-                  className={`hover:text-primary transition-all cursor-pointer ${
-                    (router.asPath.includes("auth") ||
-                      router.asPath.includes("profile")) &&
-                    "text-primary"
-                  }`}
-                />
-              )}
+            <span className="relative">
+              <FaUserAlt className={`hover:text-primary transition-all cursor-pointer ${router.asPath.includes("auth") || router.asPath.includes("profile") ? "text-primary" : ""}`} />
             </span>
           </Link>
           <Link href="/cart">
             <span className="relative">
-              <FaShoppingCart
-                className={`hover:text-primary transition-all cursor-pointer`}
-              />
+              <FaShoppingCart className="hover:text-primary transition-all cursor-pointer" />
               <span className="w-4 h-4 text-xs grid place-content-center rounded-full bg-primary absolute -top-2 -right-3 text-black font-bold">
                 {cart.products.length === 0 ? "0" : cart.products.length}
               </span>
@@ -103,7 +63,7 @@ const Header = () => {
           <button onClick={() => setIsSearchModal(true)}>
             <FaSearch className="hover:text-primary transition-all cursor-pointer" />
           </button>
-          <a href="#" className="md:inline-block hidden sm">
+          <a href="#" className="md:inline-block hidden">
             <button className="btn-primary">Order Online</button>
           </a>
           <button

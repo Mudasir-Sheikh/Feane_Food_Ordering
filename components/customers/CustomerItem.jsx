@@ -5,9 +5,7 @@ const CustomerItem = ({ imgSrc }) => {
     <div className="mt-5 mx-4">
       <div className="p-6 bg-secondary text-white rounded-[5px]">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam
+        "Feane was an absolute gem! The food was exquisite, the service impeccable, and the atmosphere was perfect for a special occasion. I highly recommend this restaurant to anyone looking for a truly memorable dining experience."
         </p>
         <div className="flex flex-col mt-4">
           <span className="text-lg font-semibold">Moana Michell</span>

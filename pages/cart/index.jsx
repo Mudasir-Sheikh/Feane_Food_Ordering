@@ -1,4 +1,3 @@
-import Title from "../../components/ui/Title";
 import { useSelector, useDispatch } from "react-redux";
 import {
   quantityDecrease,
@@ -13,15 +12,10 @@ import { useEffect, useState } from "react";
 
 const Cart = ({ userList }) => {
   const { data: session } = useSession();
-
   const cart = useSelector((state) => state.cart);
-
   const router = useRouter();
-
   const dispatch = useDispatch();
-
   const user = userList?.find((user) => user.email === session?.user?.email);
-
   const [productState, setProductState] = useState([]);
 
   const newOrder = {
@@ -42,7 +36,7 @@ const Cart = ({ userList }) => {
     });
     setProductState(productTitles);
   }, [cart.products]);
-  console.log(productState);
+
   const createOrder = async () => {
     try {
       if (session) {
@@ -68,51 +62,48 @@ const Cart = ({ userList }) => {
     }
   };
 
-  const quantityChange = (type, price) => {
+  const quantityChange = (type, product) => {
     if (type === 0) {
-      dispatch(quantityDecrease(price));
+      dispatch(quantityDecrease(product));
     }
     if (type === 1) {
-      dispatch(quantityIncrease(price));
+      dispatch(quantityIncrease(product));
     }
   };
 
   return (
-    <div className="min-h-[calc(100vh_-_433px)]">
-      <div className="flex justify-between items-center md:flex-row flex-col">
-        <div className="md:min-h-[calc(100vh_-_433px)] flex items-center flex-1 p-10 overflow-x-auto w-full justify-center">
+    <div className="min-h-[calc(100vh_-_433px)] bg-gray-100 p-6">
+      <div className="flex flex-col md:flex-row justify-between items-start">
+        <div className="flex flex-1 p-10 overflow-x-auto">
           {cart.products.length > 0 ? (
-            <div className="max-h-[40rem] overflow-auto">
-              <table
-                className="w-full text-sm text-center text-gray-500 min-w-[591px] lg:min-w-[650px] xl:min-w-[1000px] 2xl:min-w-[1250px] lg:min-h-[500px] 
-              md:min-h-[300px]  lg:text-lg"
-              >
-                <thead className="text-xs text-gray-400 uppercase bg-gray-700">
+            <div className="max-h-[40rem] overflow-auto w-full">
+              <table className="w-full text-sm text-center text-gray-700 border border-gray-300 rounded-lg shadow-md">
+                <thead className="text-xs text-gray-100 uppercase bg-gray-800">
                   <tr>
-                    <th scope="col" className="py-3 px-0">
-                      PRODUCT
+                    <th scope="col" className="py-4 px-4">
+                      Product
                     </th>
-                    <th scope="col" className="py-3 px-6">
-                      EXTRAS
+                    <th scope="col" className="py-4 px-4">
+                      Extras
                     </th>
-                    <th scope="col" className="py-3 px-2">
-                      PRICE
+                    <th scope="col" className="py-4 px-4">
+                      Price
                     </th>
-                    <th scope="col" className="py-3 px-6">
-                      QUANTITY
+                    <th scope="col" className="py-4 px-4">
+                      Quantity
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {cart.products.map((product) => (
                     <tr
-                      className="transition-all bg-secondary border-gray-700 hover:bg-primary"
+                      className="transition-all bg-white border-b hover:bg-gray-200"
                       key={product._id}
                     >
-                      <td className="py-4 px-0 font-medium whitespace-nowrap hover:text-white ">
+                      <td className="py-4 px-4 font-medium whitespace-nowrap">
                         <span className="text-purple-600">{product.title}</span>
                       </td>
-                      <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                      <td className="py-4 px-4 font-medium whitespace-nowrap">
                         {product.extras.length > 0
                           ? product.extras.map((item) => (
                               <span key={item._id}>
@@ -122,22 +113,22 @@ const Cart = ({ userList }) => {
                             ))
                           : "No Extras"}
                       </td>
-                      <td className="py-4 px-2 font-medium whitespace-nowrap hover:text-white">
+                      <td className="py-4 px-4 font-medium whitespace-nowrap">
                         ${product.price}
                       </td>
-                      <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                        <button>
-                          <i
-                            className="fa-solid fa-chevron-left mr-3 text-primary"
-                            onClick={() => quantityChange(0, product)}
-                          ></i>
+                      <td className="py-4 px-4 flex items-center justify-center">
+                        <button
+                          className="transition duration-200 hover:text-red-500"
+                          onClick={() => quantityChange(0, product)}
+                        >
+                          <i className="fa-solid fa-minus"></i>
                         </button>
-                        {product.foodQuantity}
-                        <button>
-                          <i
-                            className="fa-solid fa-chevron-right ml-3 text-primary"
-                            onClick={() => quantityChange(1, product)}
-                          ></i>
+                        <span className="mx-2">{product.foodQuantity}</span>
+                        <button
+                          className="transition duration-200 hover:text-green-500"
+                          onClick={() => quantityChange(1, product)}
+                        >
+                          <i className="fa-solid fa-plus"></i>
                         </button>
                       </td>
                     </tr>
@@ -157,21 +148,21 @@ const Cart = ({ userList }) => {
             </div>
           )}
         </div>
-        <div className="bg-secondary min-h-[calc(100vh_-_433px)] md:h-screen flex flex-col justify-center text-white p-12 lg:w-auto md:w-[250px] w-full   md:text-start !text-center">
-          <Title addClass="text-[40px]">CART TOTAL</Title>
 
+        <div className="bg-secondary min-h-[calc(100vh_-_433px)] md:h-screen flex flex-col justify-center text-white p-8 rounded-lg shadow-md md:w-[250px] w-full md:text-start text-center">
+          <h2 className="text-[40px] font-bold">Cart Total</h2>
           <div className="mt-6">
             <b>Subtotal: </b>${cart.total} <br />
-            <b className=" inline-block my-1">Discount: </b>$0.00 <br />
+            <b className="inline-block my-1">Discount: </b>$0.00 <br />
             <b>Total: </b>${cart.total}
           </div>
 
-          <div>
+          <div className="mt-8">
             <button
-              className="btn-primary mt-4 md:w-auto w-52"
+              className="btn-primary mt-4 md:w-auto w-52 transition duration-200 hover:bg-purple-600"
               onClick={createOrder}
             >
-              CHECKOUT NOW!
+              Checkout Now!
             </button>
           </div>
         </div>
@@ -191,7 +182,3 @@ export const getServerSideProps = async () => {
 };
 
 export default Cart;
-
-{
-  /* */
-}

@@ -12,13 +12,13 @@ const Carousel = () => {
     arrows: false,
     autoplay: true,
     autoplaySpeed: 30000,
-    appenDots: (dots) => (
+    appendDots: (dots) => (
       <div>
         <ul>{dots}</ul>
       </div>
     ),
     customPaging: (i) => (
-      <div className="w-3 h-3 border bg-white rounded-full mt-10"></div>
+      <div className="w-3 h-3 bg-white rounded-full mt-10"></div>
     ),
   };
 
@@ -28,7 +28,8 @@ const Carousel = () => {
         <div className="relative h-full w-full">
           <Image
             src="/images/hero-bg.jpg"
-            alt=""
+            
+            alt="Background"
             layout="fill"
             priority
             objectFit="cover"
@@ -37,25 +38,19 @@ const Carousel = () => {
       </div>
       <Slider {...settings}>
         <div>
-          <div className="mt-48  text-white flex flex-col items-start gap-y-10">
-            <Title addClass="text-6xl">Fast Food Restaurant</Title>
-            <p className="text-sm sm:w-2/5 w-full">
-              Doloremque, itaque aperiam facilis rerum, commodi, temporibus
-              sapiente ad mollitia laborum quam quisquam esse error unde.
-              Tempora ex doloremque, labore, sunt repellat dolore, iste magni
-              quos nihil ducimus libero ipsam.
+          <div className="mt-48 text-white flex flex-col items-start gap-y-8">
+            <Title addClass="text-6xl font-serif">Welcome to Feane</Title>
+            <p className="text-lg sm:w-2/5 w-full text-center">
+              Experience exquisite dining at Feane, where modern elegance meets culinary artistry. Our menu offers a selection of dishes crafted with the finest ingredients, delivering unforgettable flavors. Immerse yourself in our sophisticated ambiance and exceptional service.
             </p>
             <button className="btn-primary">Order Now</button>
           </div>
         </div>
         <div>
-          <div className="relative text-white top-48 flex flex-col items-start gap-y-10">
-            <Title addClass="text-6xl">Fast Food Restaurant</Title>
-            <p className="text-sm sm:w-2/5 w-full">
-              Doloremque, itaque aperiam facilis rerum, commodi, temporibus
-              sapiente ad mollitia laborum quam quisquam esse error unde.
-              Tempora ex doloremque, labore, sunt repellat dolore, iste magni
-              quos nihil ducimus libero ipsam.
+          <div className="relative text-white top-48 flex flex-col items-start gap-y-8">
+            <Title addClass="text-6xl font-serif">Join Us at Feane</Title>
+            <p className="text-lg sm:w-2/5 w-full text-center">
+              Discover a culinary journey at Feane, where every dish is a masterpiece. Our menu features innovative creations and classic favorites, all prepared to perfection. Enjoy an extraordinary dining experience with us.
             </p>
             <button className="btn-primary">Order Now</button>
           </div>
