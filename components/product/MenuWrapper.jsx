@@ -20,7 +20,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
   return (
     <div className="container mx-auto mb-16 px-4 md:px-0">
       <div className="flex flex-col items-center w-full text-center mb-8">
-        <Title addClass="text-[40px] text-gray-800 font-bold">Our Menu</Title>
+        <Title addClass="text-[40px] text-gray-100 font-bold">Our Menu</Title>
         <div className="mt-6 flex flex-wrap justify-center">
           {categoryList &&
             categoryList.map((category, index) => (
@@ -28,7 +28,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
                 className={`px-6 py-2 m-2 text-lg font-medium transition-colors duration-300 rounded-full shadow-md ${
                   index === active
                     ? "bg-secondary text-white"
-                    : "bg-gray-200 text-gray-800 hover:bg-secondary hover:text-white"
+                    : "bg-gray-800 text-gray-200 hover:bg-secondary hover:text-white"
                 }`}
                 key={category._id}
                 onClick={() => {
@@ -50,7 +50,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
       {filter.length > productLimit && (
         <div className="flex items-center justify-center my-8">
           <button
-            className="btn-primary px-6 py-2 text-lg font-semibold rounded-full transition-transform duration-300 transform hover:scale-105 shadow-lg"
+            className="btn-primary px-6 py-2 text-lg font-semibold rounded-full transition-transform duration-300 transform hover:scale-105 hover:bg-secondary hover:text-white shadow-lg"
             onClick={() => setProductLimit(productLimit + 3)}
           >
             View More
