@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 
 const CustomerItem = ({ imgSrc }) => {
@@ -29,4 +30,3 @@ const CustomerItem = ({ imgSrc }) => {
 };
 
 export default CustomerItem;
-
