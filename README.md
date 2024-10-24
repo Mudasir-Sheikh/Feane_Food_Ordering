@@ -19,9 +19,4 @@ tion" feature, allowing users to personalize their orders.
 
 
 
-## Acknowledgments
 
-To explore the project and learn more, visit the GitHub page: [GitHub Project Page](https://github.com/your_username/food-ordering-project)
-
-Best regards,
-Emin Kumru
